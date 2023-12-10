@@ -1,0 +1,83 @@
+[gd_scene load_steps=10 format=3 uid="uid://cgvbhc2odbbjb"]
+
+[ext_resource type="Script" path="res://scripts/World.gd" id="1_p50kh"]
+[ext_resource type="Texture2D" uid="uid://badgn0el75crx" path="res://assets/enemies/snake.png" id="1_tvssu"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_swwb4"]
+radius = 5.0
+height = 25.0
+
+[sub_resource type="Animation" id="Animation_jcyc3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SnakeSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_uolvh"]
+resource_name = "idle"
+length = 0.4
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SnakeSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_op4i5"]
+_data = {
+"RESET": SubResource("Animation_jcyc3"),
+"idle": SubResource("Animation_uolvh")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qg7dq"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_tota4"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_41h6s"]
+states/idle/node = SubResource("AnimationNodeAnimation_qg7dq")
+states/idle/position = Vector2(336, 68)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_tota4")]
+
+[node name="Snake" type="CharacterBody2D"]
+script = ExtResource("1_p50kh")
+
+[node name="SnakeSprite" type="Sprite2D" parent="."]
+y_sort_enabled = true
+texture = ExtResource("1_tvssu")
+hframes = 2
+frame = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_swwb4")
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_op4i5")
+}
+tree_root = SubResource("AnimationNodeStateMachine_41h6s")
+anim_player = NodePath("../AnimationPlayer")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_op4i5")
+}

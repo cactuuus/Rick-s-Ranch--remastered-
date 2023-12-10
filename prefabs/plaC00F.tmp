@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://cgyjkju477ly2"]
+[gd_scene load_steps=14 format=3 uid="uid://cgyjkju477ly2"]
 
 [ext_resource type="Texture2D" uid="uid://7rwvw4e2cq3u" path="res://assets/player/player.png" id="1_axawf"]
-[ext_resource type="Script" path="res://player/player_movement.gd" id="1_hpriy"]
-[ext_resource type="Script" path="res://player/gun.gd" id="3_3g583"]
+[ext_resource type="Script" path="res://scripts/PlayerMovement.gd" id="1_hpriy"]
 [ext_resource type="Texture2D" uid="uid://ur6qhrxpq02c" path="res://assets/player/Arrow.png" id="3_pyqor"]
+[ext_resource type="Texture2D" uid="uid://jv8jioai55mf" path="res://assets/shadow.png" id="3_xnibk"]
+[ext_resource type="Script" path="res://scripts/Gun.gd" id="4_nd2ff"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_865px"]
 radius = 11.0
@@ -16,7 +17,7 @@ loop_mode = 2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("PlayerSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -43,17 +44,49 @@ advance_mode = 2
 transitions = ["Start", "idle 2", SubResource("AnimationNodeStateMachineTransition_fr68b")]
 graph_offset = Vector2(0, 76.3376)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fd8rr"]
+bg_color = Color(0.32549, 0.32549, 0.32549, 0.290196)
+border_width_left = 3
+border_width_top = 2
+border_width_right = 3
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+corner_detail = 1
+expand_margin_left = 2.0
+expand_margin_top = 1.0
+expand_margin_right = 2.0
+expand_margin_bottom = 1.0
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_twwpf"]
+bg_color = Color(0.2, 0.584314, 0, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+corner_detail = 1
+anti_aliasing = false
+
 [node name="Player" type="CharacterBody2D"]
-position = Vector2(320, 209)
+scale = Vector2(0.5, 0.5)
 script = ExtResource("1_hpriy")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="PlayerSprite" type="Sprite2D" parent="."]
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("1_axawf")
 hframes = 3
-frame = 2
+
+[node name="Shadow" type="Sprite2D" parent="PlayerSprite"]
+z_index = -1
+position = Vector2(0, 155)
+texture = ExtResource("3_xnibk")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(-1, 4)
 shape = SubResource("CapsuleShape2D_865px")
 
@@ -70,9 +103,39 @@ libraries = {
 }
 
 [node name="Gun" type="Node2D" parent="."]
-script = ExtResource("3_3g583")
+script = ExtResource("4_nd2ff")
 
-[node name="Sprite2D" type="Sprite2D" parent="Gun"]
+[node name="Chevron" type="Sprite2D" parent="Gun"]
+z_index = 1
 position = Vector2(35, 0)
 scale = Vector2(0.2, 0.153)
 texture = ExtResource("3_pyqor")
+
+[node name="Stats" type="Node" parent="."]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -30.0
+offset_top = -44.0
+offset_right = 30.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HealthBar" type="ProgressBar" parent="Control"]
+z_index = 1
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 8.0
+grow_horizontal = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_fd8rr")
+theme_override_styles/fill = SubResource("StyleBoxFlat_twwpf")
+step = 1.0
+value = 100.0
+show_percentage = false
