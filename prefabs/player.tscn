@@ -41,14 +41,16 @@ animation = &"idle"
 advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_hbni0"]
-"states/idle 2/node" = SubResource("AnimationNodeAnimation_qy8ql")
-"states/idle 2/position" = Vector2(448, 118)
-transitions = ["Start", "idle 2", SubResource("AnimationNodeStateMachineTransition_fr68b")]
+states/idle/node = SubResource("AnimationNodeAnimation_qy8ql")
+states/idle/position = Vector2(448, 118)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_fr68b")]
 graph_offset = Vector2(0, 76.3376)
 
 [node name="Player" type="CharacterBody2D"]
 process_mode = 1
 scale = Vector2(0.5, 0.5)
+collision_mask = 3
+motion_mode = 1
 script = ExtResource("1_j2ya2")
 
 [node name="HealthModule" parent="." instance=ExtResource("2_w034b")]
@@ -78,9 +80,11 @@ tree_root = SubResource("AnimationNodeStateMachine_hbni0")
 anim_player = NodePath("../AnimationPlayer")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+deterministic = true
 libraries = {
 "": SubResource("AnimationLibrary_bmc0k")
 }
+autoplay = "idle"
 
 [node name="Gun" type="Node2D" parent="."]
 script = ExtResource("4_nd2ff")
