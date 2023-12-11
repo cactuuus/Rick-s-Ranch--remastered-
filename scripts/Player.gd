@@ -1,14 +1,15 @@
 extends CharacterBody2D
 
+@onready var player_sprite : Sprite2D = $PlayerSprite
+@onready var gun : Node2D = $Gun
+@onready var health : Node2D = $HealthModule
+
+@export var max_health : int = 100
 @export var move_speed : float = 200
 
-@onready var player_sprite : Sprite2D = $PlayerSprite
-@onready var health_bar : ProgressBar = $HealthBar
-@onready var gun : Node2D = $Gun
-var max_health : int = 100
-var current_health : float
-var isAlive : bool
-
+func _ready():
+	health.setup(max_health)
+	SignalManager.player_is_hit.connect(damage_calc)
 
 func _physics_process(_delta):
 	# gets input directions (normalized for consistency when moving diagonally)
@@ -20,8 +21,19 @@ func _physics_process(_delta):
 	velocity = input_direction * move_speed
 	move_and_slide()
 	update_sprite_direction()
-
+	# tries to shoot using its gun
+	if (Input.is_action_just_pressed("shoot")):
+		gun.shoot_handler()
 
 # updates the player's sprite depending on where the gun is pointing to 
 func update_sprite_direction():
 	player_sprite.flip_h = gun.is_pointing_left()
+
+# updates player's health, and checks if the player died
+func damage_calc(damage: int):
+	health.take_damage(damage)
+	if health.is_dead():
+		remove_child(gun)
+		set_physics_process(false)
+		print("player is dead")
+
