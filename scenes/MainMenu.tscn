@@ -1,8 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://b3d4gpyo3g3wb"]
+[gd_scene load_steps=10 format=3 uid="uid://b3d4gpyo3g3wb"]
 
 [ext_resource type="Script" path="res://scripts/MainMenu.gd" id="1_2ncus"]
 [ext_resource type="Texture2D" uid="uid://clma3644ywg8p" path="res://assets/UI/menu/background.png" id="1_8iaiw"]
 [ext_resource type="Texture2D" uid="uid://8f7afqjs7fi8" path="res://assets/UI/menu/rope_menu.png" id="2_30j0u"]
+[ext_resource type="Script" path="res://scripts/Clouds.gd" id="2_wdt7g"]
+[ext_resource type="Texture2D" uid="uid://ga554bghc5q4" path="res://assets/UI/menu/clouds.png" id="4_un41v"]
 
 [sub_resource type="Animation" id="Animation_6lox6"]
 length = 0.001
@@ -33,7 +35,7 @@ tracks/0/path = NodePath(".:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.5, 0.8, 1.9),
+"times": PackedFloat32Array(0.2, 0.5, 1.6),
 "transitions": PackedFloat32Array(1, 2, 0.554785),
 "update": 0,
 "values": [Vector2(29, -7), Vector2(29, -1), Vector2(29, -209)]
@@ -47,33 +49,36 @@ _data = {
 }
 
 [node name="MainMenu" type="Node2D"]
+scale = Vector2(2.9934, 2.9934)
 script = ExtResource("1_2ncus")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(192, 108)
-zoom = Vector2(3, 3)
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+script = ExtResource("2_wdt7g")
 
-[node name="Background" type="TextureRect" parent="."]
-offset_top = -69.0
+[node name="Background" type="TextureRect" parent="ParallaxBackground"]
+offset_top = -206.545
 offset_right = 1440.0
-offset_bottom = 1011.0
-scale = Vector2(0.267595, 0.267134)
+offset_bottom = 873.455
+scale = Vector2(0.801996, 0.800616)
 texture = ExtResource("1_8iaiw")
 
-[node name="MenuAnimator" type="AnimationPlayer" parent="."]
-deterministic = true
-root_node = NodePath("../MenuOptions")
-libraries = {
-"": SubResource("AnimationLibrary_v65nh")
-}
-autoplay = "fade_in"
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+position = Vector2(10.9999, 7)
+scale = Vector2(3.49821, 3.49821)
+motion_mirroring = Vector2(496, 0)
+
+[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/ParallaxLayer"]
+offset_right = 2000.0
+offset_bottom = 700.0
+scale = Vector2(0.25788, 0.25788)
+texture = ExtResource("4_un41v")
 
 [node name="MenuOptions" type="TextureRect" parent="."]
 offset_left = 29.0
-offset_top = -209.0
+offset_top = -7.0
 offset_right = 1469.0
-offset_bottom = 871.0
-scale = Vector2(0.226927, 0.226927)
+offset_bottom = 1073.0
+scale = Vector2(0.227695, 0.226927)
 texture = ExtResource("2_30j0u")
 
 [node name="Start" type="Button" parent="MenuOptions"]
@@ -101,6 +106,14 @@ offset_top = 599.311
 offset_right = 947.947
 offset_bottom = 753.311
 action_mode = 0
+
+[node name="MenuAnimator" type="AnimationPlayer" parent="."]
+deterministic = true
+root_node = NodePath("../MenuOptions")
+libraries = {
+"": SubResource("AnimationLibrary_v65nh")
+}
+autoplay = "fade_in"
 
 [connection signal="button_up" from="MenuOptions/Start" to="." method="_on_start_button_up"]
 [connection signal="button_up" from="MenuOptions/Sound" to="." method="_on_sound_button_up"]

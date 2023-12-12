@@ -1,6 +1,7 @@
 extends Node2D
 
 @onready var menu_animator : AnimationPlayer = $MenuAnimator
+@onready var parallax_bg : ParallaxBackground = $ParallaxBackground
 
 func _on_start_button_up():
 	await wait_fade_out_animation()
