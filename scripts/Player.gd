@@ -12,7 +12,7 @@ var knockback : Vector2 = Vector2.ZERO
 
 func _ready():
 	health.setup(max_health)
-	SignalManager.player_is_hit.connect(damage_calc)
+	GameManager.player_is_hit.connect(damage_calc)
 
 func _physics_process(_delta):
 	move_player()
@@ -27,13 +27,14 @@ func update_sprite_direction():
 
 # updates player's health, and checks if the player died
 func damage_calc(damage: int, enemy_direction: Vector2):
-	knockback = enemy_direction.normalized() * knockback_strength
-	animation_tree.set("parameters/BlendTree/PlayerHit/request", 1)
-	health.take_damage(damage)
-	if health.is_dead():
-		remove_child(gun)
-		set_physics_process(false)
-		print("player is dead")
+	if not health.is_dead():
+		knockback = enemy_direction.normalized() * knockback_strength
+		animation_tree.set("parameters/BlendTree/PlayerHit/request", 1)
+		health.take_damage(damage)
+		if health.is_dead():
+			remove_child(gun)
+			set_physics_process(false)
+			GameManager.player_is_dead()
 		
 func move_player():
 	# gets input directions (normalized for consistency when moving diagonally)

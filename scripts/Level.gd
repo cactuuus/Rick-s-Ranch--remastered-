@@ -8,7 +8,7 @@ var cooldown : float = 0
 var spawn_points : Array[Node]
 
 func _ready():
-	SignalManager.shot_fired.connect(spawn_bullet)
+	GameManager.shot_fired.connect(spawn_bullet)
 	spawn_points = $EnemySpawnPoints.get_children()
 	for point in spawn_points:
 		spawn_enemy(point)

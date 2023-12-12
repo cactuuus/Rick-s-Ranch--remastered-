@@ -17,12 +17,12 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-SignalManager="*res://scripts/SignalManager.gd"
+GameManager="*res://scripts/GameManager.gd"
 
 [display]
 
 window/stretch/mode="canvas_items"
-window/stretch/scale=3.5
+window/stretch/scale_mode="integer"
 
 [input]
 

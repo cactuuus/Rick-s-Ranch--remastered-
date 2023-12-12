@@ -14,7 +14,7 @@ func _physics_process(delta):
 # if player can shoot, sends a "shot fired" signal and resets the cooldown
 func shoot_handler():
 	if (cooldown > firerate):
-		SignalManager.shot_fired.emit(global_position, global_rotation, damage)
+		GameManager.shot_fired.emit(global_position, global_rotation, damage)
 		cooldown = 0
 
 # Returns true or false depending on where the player is pointing to
