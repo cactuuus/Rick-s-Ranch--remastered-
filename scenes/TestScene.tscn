@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://bgt13gxmyijgf"]
+[gd_scene load_steps=7 format=3 uid="uid://bgt13gxmyijgf"]
 
 [ext_resource type="Script" path="res://scripts/World.gd" id="1_l60d0"]
 [ext_resource type="PackedScene" uid="uid://cgvbhc2odbbjb" path="res://prefabs/enemies/Snake.tscn" id="2_8ie18"]
+[ext_resource type="PackedScene" uid="uid://dfti07wlna1va" path="res://prefabs/enemies/Vulture.tscn" id="3_dvxjm"]
 [ext_resource type="PackedScene" uid="uid://b4vo8j50dfh6n" path="res://tilemap/tilemap.tscn" id="3_tjbgl"]
+[ext_resource type="PackedScene" uid="uid://cs5olr4k42cee" path="res://prefabs/enemies/Bison.tscn" id="4_i2cn8"]
 [ext_resource type="PackedScene" uid="uid://da62em2jw04e" path="res://prefabs/Player.tscn" id="4_ygboa"]
 
 [node name="Node" type="Node"]
@@ -12,8 +14,7 @@ y_sort_enabled = true
 texture_filter = 1
 position = Vector2(3, 0)
 script = ExtResource("1_l60d0")
-spawnrate = 4.0
-enemies = Array[PackedScene]([ExtResource("2_8ie18")])
+enemies = Array[PackedScene]([ExtResource("2_8ie18"), ExtResource("3_dvxjm"), ExtResource("4_i2cn8")])
 
 [node name="TileMap" parent="World" instance=ExtResource("3_tjbgl")]
 position = Vector2(-441, -225)
