@@ -2,10 +2,11 @@ extends Node
 
 signal shot_fired(spawn_position: Vector2, rotation: float, bullet_damage: int)
 signal player_is_hit(damage: int, enemy_direction: Vector2)
+signal back_btn_pressed()
 
 const SCENES : Dictionary = {
 	"Main Menu" : "res://scenes/MainMenu.tscn",
-	"Test Level" : "res://scenes/TestScene.tscn"
+	"Level 1" : "res://scenes/TestScene.tscn"
 }
 
 # changes the scene based on the name given
