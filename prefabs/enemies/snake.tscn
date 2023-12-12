@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cgvbhc2odbbjb"]
+[gd_scene load_steps=12 format=3 uid="uid://cgvbhc2odbbjb"]
 
 [ext_resource type="Script" path="res://scripts/Enemy.gd" id="1_34lyq"]
 [ext_resource type="Texture2D" uid="uid://badgn0el75crx" path="res://assets/enemies/snake.png" id="1_tvssu"]
@@ -31,6 +31,44 @@ animations = [{
 radius = 4.0
 height = 20.0
 
+[sub_resource type="Animation" id="Animation_fmkwk"]
+resource_name = "hit"
+length = 0.16
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Color(1, 0.4073, 0.338184, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_qf5d8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_81n1y"]
+_data = {
+"RESET": SubResource("Animation_qf5d8"),
+"hit": SubResource("Animation_fmkwk")
+}
+
 [node name="Snake" type="CharacterBody2D"]
 collision_layer = 2
 motion_mode = 1
@@ -43,7 +81,7 @@ speed = 20.0
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_fhyti")
 autoplay = "default"
-frame_progress = 0.26792
+frame_progress = 0.295771
 
 [node name="HealthModule" parent="." instance=ExtResource("2_rvap3")]
 
@@ -59,3 +97,9 @@ position = Vector2(0, 2)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_swwb4")
 debug_color = Color(0, 0.6, 0.701961, 0.419608)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../AnimatedSprite2D")
+libraries = {
+"": SubResource("AnimationLibrary_81n1y")
+}

@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 @onready var health : Node2D = $HealthModule
+@onready var animation_player : AnimationPlayer = $AnimationPlayer
 var player : Node2D
 @export var max_health : int
 @export var attack : int
@@ -19,6 +20,7 @@ func _ready():
 
 func hit(damage_taken: int):
 	health.take_damage(damage_taken)
+	animation_player.play("hit")
 	if health.is_dead():
 		queue_free()
 
