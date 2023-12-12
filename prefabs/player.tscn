@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://da62em2jw04e"]
+[gd_scene load_steps=21 format=3 uid="uid://da62em2jw04e"]
 
 [ext_resource type="Texture2D" uid="uid://7rwvw4e2cq3u" path="res://assets/player/player.png" id="1_axawf"]
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1_j2ya2"]
@@ -29,22 +29,81 @@ tracks/0/keys = {
 "values": [0, 1, 2]
 }
 
+[sub_resource type="Animation" id="Animation_btt8g"]
+resource_name = "hit"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Color(1, 0.407843, 0.337255, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_76t5p"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_bmc0k"]
 _data = {
+"RESET": SubResource("Animation_76t5p"),
+"hit": SubResource("Animation_btt8g"),
 "idle": SubResource("Animation_vbpo1")
 }
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qy8ql"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_l7vhv"]
+animation = &"RESET"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_rbemp"]
+animation = &"hit"
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_0su6q"]
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_l7jpf"]
+mix_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_scayx"]
 animation = &"idle"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fr68b"]
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_d55hf"]
+graph_offset = Vector2(-54.3695, 38.4602)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_rbemp")
+nodes/Animation/position = Vector2(280, 420)
+"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_l7vhv")
+"nodes/Animation 2/position" = Vector2(240, 280)
+nodes/Default/node = SubResource("AnimationNodeBlend2_0su6q")
+nodes/Default/position = Vector2(640, 140)
+nodes/PlayerHit/node = SubResource("AnimationNodeOneShot_l7jpf")
+nodes/PlayerHit/position = Vector2(460, 260)
+nodes/idle/node = SubResource("AnimationNodeAnimation_scayx")
+nodes/idle/position = Vector2(473.144, 106.578)
+nodes/output/position = Vector2(920, 160)
+node_connections = [&"Default", 0, &"idle", &"Default", 1, &"PlayerHit", &"PlayerHit", 0, &"Animation 2", &"PlayerHit", 1, &"Animation", &"output", 0, &"Default"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_biq4x"]
 advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_hbni0"]
-states/idle/node = SubResource("AnimationNodeAnimation_qy8ql")
-states/idle/position = Vector2(448, 118)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_fr68b")]
-graph_offset = Vector2(0, 76.3376)
+states/BlendTree/node = SubResource("AnimationNodeBlendTree_d55hf")
+states/BlendTree/position = Vector2(415, 100)
+transitions = ["Start", "BlendTree", SubResource("AnimationNodeStateMachineTransition_biq4x")]
+graph_offset = Vector2(11, 12.3376)
 
 [node name="Player" type="CharacterBody2D"]
 process_mode = 1
@@ -61,7 +120,7 @@ script = ExtResource("1_j2ya2")
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("1_axawf")
 hframes = 3
-frame = 1
+frame = 2
 
 [node name="Shadow" type="Sprite2D" parent="PlayerSprite"]
 z_index = -1
@@ -77,14 +136,18 @@ libraries = {
 "": SubResource("AnimationLibrary_bmc0k")
 }
 tree_root = SubResource("AnimationNodeStateMachine_hbni0")
-anim_player = NodePath("../AnimationPlayer")
+anim_player = NodePath("AnimationPlayer")
+parameters/BlendTree/Default/blend_amount = 2.0
+parameters/BlendTree/PlayerHit/active = false
+parameters/BlendTree/PlayerHit/internal_active = false
+parameters/BlendTree/PlayerHit/request = 0
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AnimationTree"]
 deterministic = true
+root_node = NodePath("../..")
 libraries = {
 "": SubResource("AnimationLibrary_bmc0k")
 }
-autoplay = "idle"
 
 [node name="Gun" type="Node2D" parent="."]
 script = ExtResource("4_nd2ff")

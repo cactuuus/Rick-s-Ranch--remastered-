@@ -31,7 +31,6 @@ func spawn_bullet(spawn_position, spawn_rotation, bullet_damage):
 
 # spawns an enemy
 func spawn_enemy(spawn_point: Node2D):
-	print("enemy spawned")
 	var enemy = enemies.pick_random()
 	var enemy_instance = enemy.instantiate()
 	enemy_instance.global_position = spawn_point.global_position

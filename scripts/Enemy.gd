@@ -23,5 +23,5 @@ func hit(damage_taken: int):
 		queue_free()
 
 func handle_collision(collision):
-	if (collision.get_collider().name == "Player"):
+	if (collision.get_collider() == player):
 		SignalManager.player_is_hit.emit(attack, velocity)
