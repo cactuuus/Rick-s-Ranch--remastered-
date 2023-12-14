@@ -1,10 +1,9 @@
 extends Node2D
 
-const bullet : PackedScene = preload("res://scenes/components/Bullet.tscn")
-const death_screen : PackedScene = preload("res://scenes/screens/DeathScreen.tscn")
-
+const bullet : PackedScene = preload("res://prefabs/Bullet.tscn")
 
 var cooldown : float = 0
+@onready var death_screen : Control = $Player/Camera2D/DeathScreen
 @export var spawnrate : float = 1
 @export var enemies : Array[PackedScene]
 var spawn_points : Array[Node]
@@ -12,6 +11,7 @@ var spawn_points : Array[Node]
 func _ready():
 	GameManager.shot_fired.connect(spawn_bullet)
 	GameManager.player_is_dead.connect(display_death_screen)
+	death_screen.visible = false
 	spawn_points = $EnemySpawnPoints.get_children()
 	for point in spawn_points:
 		spawn_enemy(point)
@@ -39,9 +39,17 @@ func spawn_enemy(spawn_point: Node2D):
 	enemy_instance.global_position = spawn_point.global_position
 	enemy_instance.player = $Player
 	add_child(enemy_instance)
+	
+## death screen functions ##
 
 # displays the death screen
 func display_death_screen():
-	set_physics_process(false)
-	var death_screen_instance = death_screen.instantiate()
-	add_child(death_screen_instance)
+	death_screen.visible = true
+
+# returns to the main menu
+func _on_back_to_main_menu_button_up():
+	GameManager.return_to_main_menu()
+
+
+func _on_play_again_button_up():
+	GameManager.start_the_game()

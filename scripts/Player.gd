@@ -32,19 +32,25 @@ func damage_calc(damage: int, enemy_direction: Vector2):
 		animation_tree.set("parameters/BlendTree/PlayerHit/request", 1)
 		health.take_damage(damage)
 		if health.is_dead():
-			remove_child(gun)
+			gun.queue_free()
 			set_physics_process(false)
-			GameManager.player_is_dead()
-		
+			GameManager.player_is_dead.emit()
+
+# moves the character based on the player's input
 func move_player():
 	# gets input directions (normalized for consistency when moving diagonally)
 	var input_direction : Vector2 = Vector2(
 		Input.get_action_strength("right") - Input.get_action_strength("left"),
 		Input.get_action_strength("down") - Input.get_action_strength("up"),
 	).normalized()
+	update_velocity(input_direction)
+	move_and_slide()
+
+# updates the player's velocity based on the input, move_speed and knockback
+func update_velocity(input_direction):
 	velocity = input_direction * move_speed
 	if knockback:
 		velocity += knockback
 		knockback = lerp(knockback, Vector2.ZERO, 0.1)
-	move_and_slide()
+	
 

@@ -1,28 +1,42 @@
-extends Node2D
+extends CanvasLayer
 
-@onready var menu_animator : AnimationPlayer = $MenuAnimator
+@onready var menu_animator : AnimationPlayer = $MainMenu/MenuAnimator
 @onready var parallax_bg : ParallaxBackground = $ParallaxBackground
-@onready var info_screen : PackedScene = preload("res://scenes/Menu/InfoScreen.tscn")
+@onready var how_to_play_screen : Control = $HowToPlayScreen
 
 func _ready():
-	GameManager.back_btn_pressed.connect(back_to_main_menu)
+	how_to_play_screen.visible = false
 
-func _on_sound_button_up():
-	await wait_fade_out_animation()
+func _physics_process(delta):
+	parallax_bg.scroll_offset.x += 10 * delta
+
+## main menu buttons ##
+# load the how-to-play screen
+func _on_play_pressed():
+	await wait_for_animation("fade_out")
+	how_to_play_screen.visible = true
+
+# opens the settings sub-menu
+func _on_settings_pressed():
+	#await wait_for_animation("fade_out")
 	print("Sound Menu")
 
-func _on_quit_button_up():
-	await wait_fade_out_animation()
+# quits the game
+func _on_quit_pressed():
+	await wait_for_animation("fade_out")
 	GameManager.quit_game()
-
-func wait_fade_out_animation():
-	menu_animator.play("fade_out")
+	
+# starts an animation and waits until it is over
+func wait_for_animation(animation_name):
+	menu_animator.play(animation_name)
 	await menu_animator.animation_finished
 	
-func _on_play_button_up():
-	await wait_fade_out_animation()
-	var info_screen_instance = info_screen.instantiate()
-	add_child(info_screen_instance)
+## sub-menus buttons ##
+# returns to the main menu
+func _on_back_pressed():
+	how_to_play_screen.visible = false
+	await wait_for_animation("fade_in")
 
-func back_to_main_menu():
-	pass
+# starts the first level
+func _on_start_pressed():
+	GameManager.start_the_game()

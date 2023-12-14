@@ -2,15 +2,15 @@
 
 [ext_resource type="Texture2D" uid="uid://7rwvw4e2cq3u" path="res://assets/player/player.png" id="1_axawf"]
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1_j2ya2"]
-[ext_resource type="PackedScene" uid="uid://d0f3dnj1fb1vu" path="res://prefabs/HealthBar.tscn" id="2_o0bsf"]
-[ext_resource type="PackedScene" uid="uid://c81a5yush3ua1" path="res://prefabs/HealthModule.tscn" id="2_w034b"]
+[ext_resource type="PackedScene" uid="uid://d0f3dnj1fb1vu" path="res://scenes/components/HealthBar.tscn" id="2_o0bsf"]
+[ext_resource type="PackedScene" uid="uid://c81a5yush3ua1" path="res://scenes/components/HealthModule.tscn" id="2_w034b"]
 [ext_resource type="Texture2D" uid="uid://ur6qhrxpq02c" path="res://assets/player/Arrow.png" id="3_pyqor"]
 [ext_resource type="Texture2D" uid="uid://jv8jioai55mf" path="res://assets/shadow.png" id="3_xnibk"]
 [ext_resource type="Script" path="res://scripts/Gun.gd" id="4_nd2ff"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_865px"]
-radius = 11.0
-height = 50.0
+radius = 5.0
+height = 22.0
 
 [sub_resource type="Animation" id="Animation_76t5p"]
 length = 0.001
@@ -107,7 +107,6 @@ graph_offset = Vector2(11, 12.3376)
 
 [node name="Player" type="CharacterBody2D"]
 process_mode = 1
-scale = Vector2(0.5, 0.5)
 collision_mask = 3
 motion_mode = 1
 script = ExtResource("1_j2ya2")
@@ -115,19 +114,27 @@ script = ExtResource("1_j2ya2")
 [node name="HealthModule" parent="." instance=ExtResource("2_w034b")]
 
 [node name="HealthBar" parent="HealthModule" instance=ExtResource("2_o0bsf")]
+offset_left = -16.0
+offset_top = -23.0
+offset_right = 30.14
+offset_bottom = -19.0
+scale = Vector2(0.665, 0.665)
 
 [node name="PlayerSprite" type="Sprite2D" parent="."]
-scale = Vector2(0.2, 0.2)
+texture_filter = 1
+position = Vector2(0, -2)
 texture = ExtResource("1_axawf")
 hframes = 3
+frame = 1
 
 [node name="Shadow" type="Sprite2D" parent="PlayerSprite"]
 z_index = -1
-position = Vector2(0, 155)
+position = Vector2(0, 16)
+scale = Vector2(1.3, 1.3)
 texture = ExtResource("3_xnibk")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1, 4)
+position = Vector2(0, 3)
 shape = SubResource("CapsuleShape2D_865px")
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
@@ -153,6 +160,6 @@ script = ExtResource("4_nd2ff")
 
 [node name="Chevron" type="Sprite2D" parent="Gun"]
 z_index = 1
-position = Vector2(35, 0)
-scale = Vector2(0.2, 0.153)
+position = Vector2(20, 0)
+scale = Vector2(0.35, 0.35)
 texture = ExtResource("3_pyqor")

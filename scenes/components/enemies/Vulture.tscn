@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://scripts/Enemy.gd" id="1_y5duu"]
 [ext_resource type="Texture2D" uid="uid://ff4xgcd6coug" path="res://assets/enemies/volture.png" id="2_daxw8"]
-[ext_resource type="PackedScene" uid="uid://c81a5yush3ua1" path="res://prefabs/HealthModule.tscn" id="3_pqw6t"]
-[ext_resource type="PackedScene" uid="uid://d0f3dnj1fb1vu" path="res://prefabs/HealthBar.tscn" id="4_b436b"]
+[ext_resource type="PackedScene" uid="uid://c81a5yush3ua1" path="res://scenes/components/HealthModule.tscn" id="3_pqw6t"]
+[ext_resource type="PackedScene" uid="uid://d0f3dnj1fb1vu" path="res://scenes/components/HealthBar.tscn" id="4_b436b"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cba06"]
 atlas = ExtResource("2_daxw8")
