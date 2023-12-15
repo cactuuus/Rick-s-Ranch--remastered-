@@ -3,7 +3,6 @@ extends Node2D
 const bullet : PackedScene = preload("res://scenes/components/Bullet.tscn")
 const death_screen : PackedScene = preload("res://scenes/screens/DeathScreen.tscn")
 
-
 var cooldown : float = 0
 @export var spawnrate : float = 1
 @export var enemies : Array[PackedScene]

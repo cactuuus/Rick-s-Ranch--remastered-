@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://bwgepol6ephli"]
+[gd_scene load_steps=3 format=3 uid="uid://bwgepol6ephli"]
 
 [ext_resource type="Texture2D" uid="uid://b8hdwpnm5bfaj" path="res://assets/UI/menu/blank.png" id="1_o0jqr"]
 [ext_resource type="Script" path="res://scripts/Button.gd" id="2_ulls7"]
-[ext_resource type="FontFile" uid="uid://cdi3bod0ofaka" path="res://assets/font/Texas.otf" id="3_2d0o8"]
 
 [node name="Button" type="TextureButton"]
 offset_right = 250.0
@@ -20,8 +19,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("3_2d0o8")
 theme_override_font_sizes/font_size = 45
 text = "xxx"
 horizontal_alignment = 1
 vertical_alignment = 1
+uppercase = true

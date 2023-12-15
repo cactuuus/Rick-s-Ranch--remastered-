@@ -1,10 +1,11 @@
 [gd_scene load_steps=3 format=3 uid="uid://b3oujrbjtpkay"]
 
+[ext_resource type="Script" path="res://scripts/DeathScreen.gd" id="1_sibg0"]
 [ext_resource type="PackedScene" uid="uid://bwgepol6ephli" path="res://scenes/UI/Button.tscn" id="2_j2tox"]
-[ext_resource type="Texture2D" uid="uid://bivshe6i3248u" path="res://assets/UI/menu/you_died.png" id="3_o7tpv"]
 
 [node name="DeathScreen" type="CanvasLayer"]
 process_mode = 1
+script = ExtResource("1_sibg0")
 
 [node name="Background" type="ColorRect" parent="."]
 self_modulate = Color(0.152941, 0.152941, 0.152941, 0.545098)
@@ -14,20 +15,18 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="YouDied" type="TextureRect" parent="Background"]
+[node name="YouDied" type="Label" parent="Background"]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -125.0
-offset_top = -119.0
-offset_right = 125.0
-offset_bottom = 56.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("3_o7tpv")
+theme_override_font_sizes/font_size = 55
+text = "you died"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
 
 [node name="PlayAgain" parent="Background" instance=ExtResource("2_j2tox")]
 layout_mode = 1
@@ -55,3 +54,6 @@ offset_right = 350.0
 offset_bottom = -63.0
 grow_vertical = 0
 text = "menu"
+
+[connection signal="pressed" from="Background/PlayAgain" to="." method="_on_play_again_pressed"]
+[connection signal="pressed" from="Background/Menu" to="." method="_on_menu_pressed"]

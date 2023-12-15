@@ -1,9 +1,0 @@
-[gd_resource type="Theme" load_steps=2 format=3 uid="uid://bws76op6liscp"]
-
-[ext_resource type="FontFile" uid="uid://cdi3bod0ofaka" path="res://assets/font/Texas.otf" id="1_2cv2t"]
-
-[resource]
-default_font = ExtResource("1_2cv2t")
-default_font_size = 28
-Label/colors/font_color = Color(0, 0, 0, 1)
-RichTextLabel/colors/default_color = Color(0, 0, 0, 1)

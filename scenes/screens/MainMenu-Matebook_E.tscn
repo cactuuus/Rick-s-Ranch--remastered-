@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cejrldl0vyxai" path="res://assets/UI/menu/background.png" id="2_cxsty"]
 [ext_resource type="Texture2D" uid="uid://ga554bghc5q4" path="res://assets/UI/menu/clouds.png" id="3_bhvwj"]
 [ext_resource type="Texture2D" uid="uid://bpfxp8uaqfw5s" path="res://assets/UI/menu/ropes.png" id="4_8odao"]
+[ext_resource type="Theme" uid="uid://diae6u3u7r7c4" path="res://font_settings.tres" id="5_gnokt"]
 [ext_resource type="PackedScene" uid="uid://bwgepol6ephli" path="res://scenes/UI/Button.tscn" id="5_hd3oj"]
 
 [sub_resource type="Animation" id="Animation_wnff0"]
@@ -43,8 +44,6 @@ _data = {
 "fade_in": SubResource("Animation_wnff0"),
 "fade_out": SubResource("Animation_7dwxr")
 }
-
-[sub_resource type="Theme" id="Theme_68s4g"]
 
 [node name="MainScreen" type="CanvasLayer"]
 script = ExtResource("1_g575d")
@@ -149,16 +148,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = SubResource("Theme_68s4g")
-
-[node name="Background" type="ColorRect" parent="HowToPlayScreen"]
-self_modulate = Color(0.152941, 0.152941, 0.152941, 0.545098)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+theme = ExtResource("5_gnokt")
 
 [node name="Instructions" type="Control" parent="HowToPlayScreen"]
 layout_mode = 1
@@ -177,9 +167,8 @@ grow_horizontal = 2
 theme_override_font_sizes/font_size = 46
 text = "how to play"
 horizontal_alignment = 1
-uppercase = true
 
-[node name="Explanation" type="Label" parent="HowToPlayScreen/Instructions"]
+[node name="Explanation" type="RichTextLabel" parent="HowToPlayScreen/Instructions"]
 layout_mode = 1
 anchors_preset = 14
 anchor_top = 0.5
@@ -191,16 +180,13 @@ offset_right = -75.0
 offset_bottom = 185.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 26
+bbcode_enabled = true
 text = "Rick likes to drink, and he is slowly forgetting how to move!
 
-As you fight endless hoardes of enemies, keep an eye out for your directional controls: your directional keys will consume over time and re-bind to new, random ones.
+as you fight endless hoardes of enemies, keep an eye out for your directional controls: your directional keys will consume over time and re-bind to new, random ones.
 
-How long will you be able to defend his ranch?"
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 3
-uppercase = true
+[center]how long will you be able to defend your ranch?[/center] "
+fit_content = true
 
 [node name="Back" parent="HowToPlayScreen" instance=ExtResource("5_hd3oj")]
 layout_mode = 1

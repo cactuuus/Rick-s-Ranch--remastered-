@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cgvbhc2odbbjb" path="res://scenes/components/enemies/Snake.tscn" id="2_m3kdh"]
 [ext_resource type="PackedScene" uid="uid://dfti07wlna1va" path="res://scenes/components/enemies/Vulture.tscn" id="3_a846i"]
 [ext_resource type="PackedScene" uid="uid://cs5olr4k42cee" path="res://scenes/components/enemies/Bison.tscn" id="4_o80ub"]
-[ext_resource type="PackedScene" uid="uid://b4vo8j50dfh6n" path="res://tilemap/tilemap.tscn" id="5_gaasi"]
+[ext_resource type="PackedScene" uid="uid://b4vo8j50dfh6n" path="res://scenes/components/tilemap.tscn" id="5_gaasi"]
 [ext_resource type="PackedScene" uid="uid://da62em2jw04e" path="res://scenes/components/Player.tscn" id="6_2otkd"]
 
 [node name="Level" type="Node2D"]

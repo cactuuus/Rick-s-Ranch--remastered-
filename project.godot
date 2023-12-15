@@ -13,7 +13,6 @@ config_version=5
 config/name="Rick's Ranch"
 run/main_scene="res://scenes/screens/MainMenu.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
-boot_splash/image="res://assets/UI/menu/background.png"
 config/icon="res://icon.svg"
 
 [autoload]
@@ -25,6 +24,10 @@ GameManager="*res://scripts/GameManager.gd"
 window/size/mode=2
 window/stretch/mode="canvas_items"
 window/stretch/scale_mode="integer"
+
+[gui]
+
+theme/custom_font="res://assets/font/RyeRegular-MVZKe.ttf"
 
 [input]
 
@@ -62,6 +65,5 @@ shoot={
 
 [rendering]
 
-textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"

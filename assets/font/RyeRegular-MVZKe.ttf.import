@@ -2,18 +2,18 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://cdi3bod0ofaka"
-path="res://.godot/imported/Texas.otf-eb013525f084490ef7c3ce4d31084827.fontdata"
+uid="uid://bel0b8towaosx"
+path="res://.godot/imported/RyeRegular-MVZKe.ttf-7a5eee407a6ac7abc848d9ce24c983e2.fontdata"
 
 [deps]
 
-source_file="res://assets/font/Texas.otf"
-dest_files=["res://.godot/imported/Texas.otf-eb013525f084490ef7c3ce4d31084827.fontdata"]
+source_file="res://assets/font/RyeRegular-MVZKe.ttf"
+dest_files=["res://.godot/imported/RyeRegular-MVZKe.ttf-7a5eee407a6ac7abc848d9ce24c983e2.fontdata"]
 
 [params]
 
 Rendering=null
-antialiasing=0
+antialiasing=1
 generate_mipmaps=false
 multichannel_signed_distance_field=false
 msdf_pixel_range=8
@@ -22,7 +22,7 @@ allow_system_fallback=true
 force_autohinter=false
 hinting=1
 subpixel_positioning=1
-oversampling=10.0
+oversampling=0.0
 Fallbacks=null
 fallbacks=[]
 Compress=null
