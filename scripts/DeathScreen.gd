@@ -1,4 +1,4 @@
-extends CanvasLayer
+extends Control
 
 # restarts from level 1
 func _on_play_again_pressed():

@@ -3,6 +3,8 @@ extends Node2D
 const bullet : PackedScene = preload("res://scenes/components/Bullet.tscn")
 const death_screen : PackedScene = preload("res://scenes/screens/DeathScreen.tscn")
 
+@onready var UI : CanvasLayer = $UI
+
 var cooldown : float = 0
 @export var spawnrate : float = 1
 @export var enemies : Array[PackedScene]
@@ -11,6 +13,7 @@ var spawn_points : Array[Node]
 func _ready():
 	GameManager.shot_fired.connect(spawn_bullet)
 	GameManager.player_is_dead.connect(display_death_screen)
+	await wait_end_scene_transition()
 	spawn_points = $EnemySpawnPoints.get_children()
 	for point in spawn_points:
 		spawn_enemy(point)
@@ -44,3 +47,10 @@ func display_death_screen():
 	set_physics_process(false)
 	var death_screen_instance = death_screen.instantiate()
 	add_child(death_screen_instance)
+
+#
+func wait_end_scene_transition():
+	set_physics_process(false)
+	await $UI/SceneTransition/AnimationPlayer.animation_finished
+	$UI/SceneTransition.queue_free()
+	set_physics_process(true)
