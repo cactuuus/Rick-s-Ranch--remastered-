@@ -46,7 +46,7 @@ func spawn_enemy(spawn_point: Node2D):
 func display_death_screen():
 	set_physics_process(false)
 	var death_screen_instance = death_screen.instantiate()
-	add_child(death_screen_instance)
+	UI.add_child(death_screen_instance)
 
 #
 func wait_end_scene_transition():

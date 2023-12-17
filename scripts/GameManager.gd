@@ -3,6 +3,8 @@ extends Node
 signal shot_fired(spawn_position: Vector2, rotation: float, bullet_damage: int)
 signal player_is_hit(damage: int, enemy_direction: Vector2)
 signal player_is_dead()
+signal input_key_updated(action_name: String)
+signal reset_input_keys()
 
 const SCENES : Dictionary = {
 	"Main Menu" : "res://scenes/screens/MainMenu.tscn",
@@ -19,6 +21,7 @@ func return_to_main_menu():
 
 # loads the first lavel
 func start_the_game():
+	reset_input_keys.emit()
 	change_scene("Level 1")
 	
 # quits the game

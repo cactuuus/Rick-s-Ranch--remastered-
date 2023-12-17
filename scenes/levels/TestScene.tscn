@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://b4vo8j50dfh6n" path="res://scenes/components/tilemap.tscn" id="5_gaasi"]
 [ext_resource type="PackedScene" uid="uid://cdhgr2s2n8l62" path="res://scenes/screens/SceneTransition.tscn" id="5_m2kyo"]
 [ext_resource type="PackedScene" uid="uid://da62em2jw04e" path="res://scenes/components/Player.tscn" id="6_2otkd"]
-[ext_resource type="Texture2D" uid="uid://bkosqb5yi3s7a" path="res://assets/UI/input_border.png" id="8_fqvwp"]
+[ext_resource type="PackedScene" uid="uid://d0v7qn7dg2733" path="res://scenes/UI/CurrentKeysUI.tscn" id="8_muow5"]
 
 [node name="Level" type="Node2D"]
 process_mode = 1
@@ -45,119 +45,4 @@ offset_left = 1.0
 offset_right = 1.0
 text = "level 1"
 
-[node name="CurrentKeys" type="Control" parent="UI"]
-layout_mode = 3
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -120.0
-offset_top = -160.0
-offset_right = 120.0
-grow_horizontal = 2
-grow_vertical = 0
-
-[node name="Left" type="TextureRect" parent="UI/CurrentKeys"]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -80.0
-offset_right = 80.0
-grow_vertical = 0
-texture = ExtResource("8_fqvwp")
-
-[node name="Key" type="Label" parent="UI/CurrentKeys/Left"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 42
-text = "A"
-horizontal_alignment = 1
-vertical_alignment = 1
-uppercase = true
-
-[node name="Right" type="TextureRect" parent="UI/CurrentKeys"]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -80.0
-offset_top = -80.0
-grow_horizontal = 0
-grow_vertical = 0
-texture = ExtResource("8_fqvwp")
-
-[node name="Key" type="Label" parent="UI/CurrentKeys/Right"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 42
-text = "D"
-horizontal_alignment = 1
-vertical_alignment = 1
-uppercase = true
-
-[node name="Up" type="TextureRect" parent="UI/CurrentKeys"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -40.0
-offset_right = 40.0
-offset_bottom = 80.0
-grow_horizontal = 2
-texture = ExtResource("8_fqvwp")
-
-[node name="Key" type="Label" parent="UI/CurrentKeys/Up"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 42
-text = "W"
-horizontal_alignment = 1
-vertical_alignment = 1
-uppercase = true
-
-[node name="Down" type="TextureRect" parent="UI/CurrentKeys"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -40.0
-offset_top = -80.0
-offset_right = 40.0
-grow_horizontal = 2
-grow_vertical = 0
-texture = ExtResource("8_fqvwp")
-
-[node name="Key" type="Label" parent="UI/CurrentKeys/Down"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 42
-text = "S"
-horizontal_alignment = 1
-vertical_alignment = 1
-uppercase = true
+[node name="CurrentKeys" parent="UI" instance=ExtResource("8_muow5")]
