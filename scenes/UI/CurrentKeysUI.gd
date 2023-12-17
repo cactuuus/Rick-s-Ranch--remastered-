@@ -20,7 +20,8 @@ func _ready():
 # updates the content of a label to the new keybind
 func update_input_key(action: String, play_animation: bool = true):
 	var key = InputMap.action_get_events(action)[0]
-	keys[action]["current_key"] = key.as_text_keycode()
+	# if keycode is 0 (meaning unset), simply assign an empty string
+	keys[action]["current_key"] = key.as_text_keycode() if key.keycode else "" 
 	if play_animation:
 		animation_tree.set("parameters/{0}/request".format([action]), 1)
 	else:
@@ -30,3 +31,4 @@ func update_input_key(action: String, play_animation: bool = true):
 # this function is called by the AnimationPlayer
 func update_label_text(action: String):
 	keys[action]["label"].set_text(keys[action]["current_key"])
+		
