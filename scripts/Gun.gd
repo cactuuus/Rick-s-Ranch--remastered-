@@ -2,6 +2,7 @@ extends Node2D
 
 @export var firerate : float = 0.1
 @export var damage : int = 10
+@onready var gunshot_sound : AudioStreamPlayer = $Gunshot
 var cooldown : float = 0
 var target : Vector2
 
@@ -15,6 +16,7 @@ func _physics_process(delta):
 func shoot_handler():
 	if (cooldown > firerate):
 		GameManager.shot_fired.emit(global_position, global_rotation, damage)
+		gunshot_sound.play()
 		cooldown = 0
 
 # Returns true or false depending on where the player is pointing to

@@ -1,0 +1,137 @@
+[gd_scene load_steps=9 format=3 uid="uid://c8t62crjmgfjf"]
+
+[ext_resource type="Texture2D" uid="uid://cdd6krlf5x6yh" path="res://assets/UI/menu/ropes-short.png" id="1_jjor3"]
+[ext_resource type="Texture2D" uid="uid://ff4xgcd6coug" path="res://assets/enemies/volture.png" id="2_kguik"]
+[ext_resource type="Texture2D" uid="uid://be33of1dnnjr6" path="res://assets/enemies/bison.png" id="3_y0smw"]
+[ext_resource type="Texture2D" uid="uid://badgn0el75crx" path="res://assets/enemies/snake.png" id="4_ncvgd"]
+
+[sub_resource type="Animation" id="Animation_21233"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -213)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("EnemiesLeft/Label:theme_override_font_sizes/font_size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [42]
+}
+
+[sub_resource type="Animation" id="Animation_5033m"]
+resource_name = "drop_in"
+length = 2.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1, 2.5),
+"transitions": PackedFloat32Array(0.307786, 2.46229),
+"update": 0,
+"values": [Vector2(0, -213), Vector2(0, -20)]
+}
+
+[sub_resource type="Animation" id="Animation_2y2p8"]
+resource_name = "font_pulse"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EnemiesLeft/Label:theme_override_font_sizes/font_size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.217638, 1),
+"update": 0,
+"values": [60, 42]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2qsx0"]
+_data = {
+"RESET": SubResource("Animation_21233"),
+"drop_in": SubResource("Animation_5033m"),
+"font_pulse": SubResource("Animation_2y2p8")
+}
+
+[node name="LevelStats" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_top = -213.0
+offset_right = 1152.0
+offset_bottom = 1.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_2qsx0")
+}
+autoplay = "drop_in"
+
+[node name="EnemiesLeft" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -340.0
+offset_top = -20.0
+offset_right = -20.0
+offset_bottom = 188.0
+grow_horizontal = 0
+texture = ExtResource("1_jjor3")
+flip_h = true
+
+[node name="Label" type="Label" parent="EnemiesLeft"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 47.0
+offset_top = 60.0
+offset_right = -191.0
+offset_bottom = -71.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 42
+text = "x"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Sprite2D3" type="Sprite2D" parent="EnemiesLeft"]
+visible = false
+position = Vector2(152, 104)
+scale = Vector2(3, 3)
+texture = ExtResource("3_y0smw")
+hframes = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="EnemiesLeft"]
+position = Vector2(198, 91)
+scale = Vector2(4, 4)
+texture = ExtResource("4_ncvgd")
+hframes = 2
+
+[node name="Sprite2D2" type="Sprite2D" parent="EnemiesLeft"]
+visible = false
+position = Vector2(88, 96)
+scale = Vector2(3, 3)
+texture = ExtResource("2_kguik")
+flip_h = true
+hframes = 3

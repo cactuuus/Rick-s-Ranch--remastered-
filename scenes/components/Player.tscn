@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://da62em2jw04e"]
+[gd_scene load_steps=23 format=3 uid="uid://da62em2jw04e"]
 
 [ext_resource type="Texture2D" uid="uid://7rwvw4e2cq3u" path="res://assets/player/player.png" id="1_axawf"]
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1_j2ya2"]
@@ -7,6 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://ur6qhrxpq02c" path="res://assets/player/Arrow.png" id="3_pyqor"]
 [ext_resource type="Texture2D" uid="uid://jv8jioai55mf" path="res://assets/shadow.png" id="3_xnibk"]
 [ext_resource type="Script" path="res://scripts/Gun.gd" id="4_nd2ff"]
+[ext_resource type="AudioStream" uid="uid://cuhljnknttfua" path="res://audio/gunshot.ogg" id="8_f7kfh"]
+[ext_resource type="AudioStream" uid="uid://1rihk5njwex6" path="res://audio/player-hit.wav" id="9_gs8vs"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_865px"]
 radius = 5.0
@@ -106,7 +108,6 @@ transitions = ["Start", "BlendTree", SubResource("AnimationNodeStateMachineTrans
 graph_offset = Vector2(11, 12.3376)
 
 [node name="Player" type="CharacterBody2D"]
-process_mode = 1
 collision_mask = 3
 motion_mode = 1
 script = ExtResource("1_j2ya2")
@@ -125,7 +126,6 @@ texture_filter = 1
 position = Vector2(0, -2)
 texture = ExtResource("1_axawf")
 hframes = 3
-frame = 1
 
 [node name="Shadow" type="Sprite2D" parent="PlayerSprite"]
 z_index = -1
@@ -157,9 +157,18 @@ libraries = {
 
 [node name="Gun" type="Node2D" parent="."]
 script = ExtResource("4_nd2ff")
+firerate = 0.15
 
 [node name="Chevron" type="Sprite2D" parent="Gun"]
 z_index = 1
 position = Vector2(20, 0)
 scale = Vector2(0.35, 0.35)
 texture = ExtResource("3_pyqor")
+
+[node name="Gunshot" type="AudioStreamPlayer" parent="Gun"]
+stream = ExtResource("8_f7kfh")
+volume_db = -10.0
+
+[node name="Hit" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_gs8vs")
+volume_db = -5.0

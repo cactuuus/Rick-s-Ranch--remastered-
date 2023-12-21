@@ -4,6 +4,7 @@ extends CharacterBody2D
 @onready var gun : Node2D = $Gun
 @onready var health : Node2D = $HealthModule
 @onready var animation_tree : AnimationTree = $AnimationTree
+@onready var hit_sound : AudioStreamPlayer = $Hit
 
 @export var max_health : int = 100
 @export var move_speed : float = 200
@@ -28,6 +29,7 @@ func update_sprite_direction():
 # updates player's health, and checks if the player died
 func damage_calc(damage: int, enemy_direction: Vector2):
 	if not health.is_dead():
+		hit_sound.play()
 		knockback = enemy_direction.normalized() * knockback_strength
 		animation_tree.set("parameters/BlendTree/PlayerHit/request", 1)
 		health.take_damage(damage)

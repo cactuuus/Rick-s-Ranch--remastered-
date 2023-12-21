@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bwgepol6ephli"]
+[gd_scene load_steps=4 format=3 uid="uid://bwgepol6ephli"]
 
 [ext_resource type="Texture2D" uid="uid://b8hdwpnm5bfaj" path="res://assets/UI/menu/blank.png" id="1_o0jqr"]
 [ext_resource type="Script" path="res://scripts/Button.gd" id="2_ulls7"]
+[ext_resource type="AudioStream" uid="uid://c3u3x7gbq13qj" path="res://audio/button-click.wav" id="3_uu35s"]
 
 [node name="Button" type="TextureButton"]
 offset_right = 250.0
@@ -24,3 +25,7 @@ text = "xxx"
 horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_uu35s")
+volume_db = -10.0

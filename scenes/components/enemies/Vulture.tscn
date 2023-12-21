@@ -1,9 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://dfti07wlna1va"]
+[gd_scene load_steps=15 format=3 uid="uid://dfti07wlna1va"]
 
 [ext_resource type="Script" path="res://scripts/Enemy.gd" id="1_y5duu"]
 [ext_resource type="Texture2D" uid="uid://ff4xgcd6coug" path="res://assets/enemies/volture.png" id="2_daxw8"]
+[ext_resource type="Texture2D" uid="uid://jv8jioai55mf" path="res://assets/shadow.png" id="3_j75jb"]
 [ext_resource type="PackedScene" uid="uid://c81a5yush3ua1" path="res://scenes/components/HealthModule.tscn" id="3_pqw6t"]
 [ext_resource type="PackedScene" uid="uid://d0f3dnj1fb1vu" path="res://scenes/components/HealthBar.tscn" id="4_b436b"]
+[ext_resource type="AudioStream" uid="uid://bidvgl7l73pru" path="res://audio/vulture.ogg" id="5_yoybk"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cba06"]
 atlas = ExtResource("2_daxw8")
@@ -93,6 +95,12 @@ sprite_frames = SubResource("SpriteFrames_fhyti")
 autoplay = "default"
 frame_progress = 0.174005
 
+[node name="Shadow" type="Sprite2D" parent="EnemySprite"]
+show_behind_parent = true
+position = Vector2(1, 16)
+scale = Vector2(1.19, 1)
+texture = ExtResource("3_j75jb")
+
 [node name="HealthModule" parent="." instance=ExtResource("3_pqw6t")]
 
 [node name="HealthBar" parent="HealthModule" instance=ExtResource("4_b436b")]
@@ -113,3 +121,13 @@ root_node = NodePath("../EnemySprite")
 libraries = {
 "": SubResource("AnimationLibrary_81n1y")
 }
+
+[node name="Cry" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_yoybk")
+attenuation = 6.27667
+
+[node name="CryTimer" type="Timer" parent="."]
+process_callback = 0
+autostart = true
+
+[connection signal="timeout" from="CryTimer" to="." method="_on_cry_timer_timeout"]

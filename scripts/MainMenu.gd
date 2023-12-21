@@ -1,8 +1,9 @@
 extends CanvasLayer
 
-@onready var menu_animator : AnimationPlayer = $MainMenu/MenuAnimator
+@onready var menu_animator : AnimationPlayer = $MenuAnimator
 @onready var parallax_bg : ParallaxBackground = $ParallaxBackground
 @onready var how_to_play_screen : Control = $HowToPlayScreen
+@onready var music : AudioStreamPlayer = $Music
 
 func _ready():
 	how_to_play_screen.visible = false
@@ -39,4 +40,5 @@ func _on_back_pressed():
 
 # starts the first level
 func _on_start_pressed():
+	menu_animator.play("music_fade_out")
 	GameManager.start_the_game()

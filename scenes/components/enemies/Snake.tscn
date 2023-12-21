@@ -1,9 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://cgvbhc2odbbjb"]
+[gd_scene load_steps=14 format=3 uid="uid://cgvbhc2odbbjb"]
 
 [ext_resource type="Script" path="res://scripts/Enemy.gd" id="1_34lyq"]
 [ext_resource type="Texture2D" uid="uid://badgn0el75crx" path="res://assets/enemies/snake.png" id="1_tvssu"]
 [ext_resource type="PackedScene" uid="uid://d0f3dnj1fb1vu" path="res://scenes/components/HealthBar.tscn" id="2_5pqvv"]
 [ext_resource type="PackedScene" uid="uid://c81a5yush3ua1" path="res://scenes/components/HealthModule.tscn" id="2_rvap3"]
+[ext_resource type="Texture2D" uid="uid://jv8jioai55mf" path="res://assets/shadow.png" id="3_nnjjf"]
+[ext_resource type="AudioStream" uid="uid://cm2jj0cmfdfug" path="res://audio/snake-hissing.ogg" id="5_3gjmd"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_k3e0b"]
 atlas = ExtResource("1_tvssu")
@@ -83,6 +85,12 @@ sprite_frames = SubResource("SpriteFrames_fhyti")
 autoplay = "default"
 frame_progress = 0.447541
 
+[node name="Shadow" type="Sprite2D" parent="EnemySprite"]
+show_behind_parent = true
+position = Vector2(2, 7)
+scale = Vector2(1.515, 1)
+texture = ExtResource("3_nnjjf")
+
 [node name="HealthModule" parent="." instance=ExtResource("2_rvap3")]
 
 [node name="HealthBar" parent="HealthModule" instance=ExtResource("2_5pqvv")]
@@ -103,3 +111,13 @@ root_node = NodePath("../EnemySprite")
 libraries = {
 "": SubResource("AnimationLibrary_81n1y")
 }
+
+[node name="Cry" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_3gjmd")
+attenuation = 6.27667
+
+[node name="CryTimer" type="Timer" parent="."]
+process_callback = 0
+autostart = true
+
+[connection signal="timeout" from="CryTimer" to="." method="_on_cry_timer_timeout"]

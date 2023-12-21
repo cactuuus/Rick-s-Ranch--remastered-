@@ -10,5 +10,6 @@ func _ready():
 func _process(_delta):
 	if is_pressed():
 		set_self_modulate(modulate_color.darkened(0.5))
+		$ClickSound.play()
 	else:
 		set_self_modulate(modulate_color)

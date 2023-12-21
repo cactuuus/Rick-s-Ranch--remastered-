@@ -1,13 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://bgt13gxmyijgf"]
+[gd_scene load_steps=10 format=3 uid="uid://bgt13gxmyijgf"]
 
 [ext_resource type="Script" path="res://scripts/Level.gd" id="1_5ndfa"]
 [ext_resource type="PackedScene" uid="uid://cgvbhc2odbbjb" path="res://scenes/components/enemies/Snake.tscn" id="2_m3kdh"]
 [ext_resource type="PackedScene" uid="uid://dfti07wlna1va" path="res://scenes/components/enemies/Vulture.tscn" id="3_a846i"]
 [ext_resource type="PackedScene" uid="uid://cs5olr4k42cee" path="res://scenes/components/enemies/Bison.tscn" id="4_o80ub"]
 [ext_resource type="PackedScene" uid="uid://b4vo8j50dfh6n" path="res://scenes/components/tilemap.tscn" id="5_gaasi"]
-[ext_resource type="PackedScene" uid="uid://cdhgr2s2n8l62" path="res://scenes/screens/SceneTransition.tscn" id="5_m2kyo"]
 [ext_resource type="PackedScene" uid="uid://da62em2jw04e" path="res://scenes/components/Player.tscn" id="6_2otkd"]
+[ext_resource type="PackedScene" uid="uid://cdhgr2s2n8l62" path="res://scenes/screens/LevelIntro.tscn" id="8_cwvc3"]
 [ext_resource type="PackedScene" uid="uid://d0v7qn7dg2733" path="res://scenes/UI/CurrentKeysUI.tscn" id="8_muow5"]
+[ext_resource type="PackedScene" uid="uid://c8t62crjmgfjf" path="res://scenes/UI/LevelStats.tscn" id="9_g5lw4"]
 
 [node name="Level" type="Node2D"]
 process_mode = 1
@@ -16,6 +17,7 @@ texture_filter = 1
 position = Vector2(1, 0)
 script = ExtResource("1_5ndfa")
 enemies = Array[PackedScene]([ExtResource("2_m3kdh"), ExtResource("3_a846i"), ExtResource("4_o80ub")])
+total_enemies = 10
 
 [node name="TileMap" parent="." instance=ExtResource("5_gaasi")]
 position = Vector2(-441, -225)
@@ -40,9 +42,9 @@ gizmo_extents = 33.0
 
 [node name="UI" type="CanvasLayer" parent="."]
 
-[node name="SceneTransition" parent="UI" instance=ExtResource("5_m2kyo")]
-offset_left = 1.0
-offset_right = 1.0
-text = "level 1"
+[node name="LevelStats" parent="UI" instance=ExtResource("9_g5lw4")]
 
 [node name="CurrentKeys" parent="UI" instance=ExtResource("8_muow5")]
+
+[node name="LevelIntro" parent="UI" instance=ExtResource("8_cwvc3")]
+text = "test scene"
