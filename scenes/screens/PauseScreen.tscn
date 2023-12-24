@@ -1,0 +1,65 @@
+[gd_scene load_steps=3 format=3 uid="uid://bcmfcc2evd4uf"]
+
+[ext_resource type="Script" path="res://scripts/PauseScreen.gd" id="1_000ci"]
+[ext_resource type="PackedScene" uid="uid://bwgepol6ephli" path="res://scenes/UI/Button.tscn" id="2_5derr"]
+
+[node name="PauseScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_000ci")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.152941, 0.152941, 0.152941, 0.545098)
+
+[node name="Paused" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 55
+text = "Paused"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Resume" parent="." instance=ExtResource("2_5derr")]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -350.0
+offset_top = -148.0
+offset_right = -100.0
+offset_bottom = -63.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "resume"
+
+[node name="Menu" parent="." instance=ExtResource("2_5derr")]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 100.0
+offset_top = -148.0
+offset_right = 350.0
+offset_bottom = -63.0
+grow_vertical = 0
+text = "menu"
+
+[connection signal="pressed" from="Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="Menu" to="." method="_on_menu_pressed"]

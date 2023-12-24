@@ -6,6 +6,7 @@ signal player_is_dead()
 signal enemy_killed()
 signal input_key_updated(action_name: String)
 signal reset_input_keys()
+signal pause_toggled()
 
 @onready var level_music = preload("res://scenes/levels/LevelMusic.tscn")
 @onready var scene_transition = preload("res://scenes/screens/SceneTransition.tscn")
@@ -15,6 +16,13 @@ const SCENES : Dictionary = {
 	"Main Menu" : "res://scenes/screens/MainMenu.tscn",
 	"Level 1" : "res://scenes/levels/TestScene.tscn",
 }
+
+func _ready():
+	process_mode = Node.PROCESS_MODE_ALWAYS
+
+func _physics_process(_delta):
+	if (Input.is_action_just_pressed("pause")):
+		pause_toggled.emit()
 
 # changes the scene based on the name given
 func change_scene(scene_name: String):
@@ -32,6 +40,8 @@ func return_to_main_menu():
 	change_scene("Main Menu")
 	await animator.animation_finished
 	level_music_instance.queue_free()
+	# makes sure the game is unpaused
+	get_tree().paused = false
 
 # load the first level and starts the in-level music (if not already playing)
 func start_the_game():
@@ -40,7 +50,6 @@ func start_the_game():
 	if not level_music_instance:
 		level_music_instance = level_music.instantiate()
 		get_tree().root.add_child(level_music_instance)
-	
 
 # quits the game
 func quit_game():

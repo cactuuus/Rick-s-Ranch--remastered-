@@ -110,6 +110,7 @@ graph_offset = Vector2(11, 12.3376)
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 3
 motion_mode = 1
+wall_min_slide_angle = 0.0
 script = ExtResource("1_j2ya2")
 
 [node name="HealthModule" parent="." instance=ExtResource("2_w034b")]
@@ -126,6 +127,7 @@ texture_filter = 1
 position = Vector2(0, -2)
 texture = ExtResource("1_axawf")
 hframes = 3
+frame = 1
 
 [node name="Shadow" type="Sprite2D" parent="PlayerSprite"]
 z_index = -1

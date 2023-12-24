@@ -44,8 +44,8 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_swwb4"]
-radius = 4.0
-height = 20.0
+radius = 6.0
+height = 24.0
 
 [sub_resource type="Animation" id="Animation_qf5d8"]
 length = 0.001
@@ -87,7 +87,9 @@ _data = {
 
 [node name="Bison" type="CharacterBody2D"]
 collision_layer = 2
+collision_mask = 39
 motion_mode = 1
+wall_min_slide_angle = 0.0
 script = ExtResource("1_axavk")
 max_health = 70
 attack = 15
@@ -115,7 +117,7 @@ offset_bottom = -7.0
 scale = Vector2(0.3, 0.3)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 2)
+position = Vector2(0, -1)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_swwb4")
 debug_color = Color(0, 0.6, 0.701961, 0.419608)

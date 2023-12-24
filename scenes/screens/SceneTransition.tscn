@@ -50,6 +50,7 @@ _data = {
 }
 
 [node name="SceneTransition" type="CanvasLayer"]
+process_mode = 3
 
 [node name="TextureRect" type="TextureRect" parent="."]
 anchors_preset = 15
@@ -61,6 +62,7 @@ texture = SubResource("GradientTexture2D_pm3ns")
 metadata/_edit_use_anchors_ = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+process_mode = 3
 libraries = {
 "": SubResource("AnimationLibrary_u7vc5")
 }

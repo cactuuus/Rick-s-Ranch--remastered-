@@ -1,9 +1,10 @@
 extends Node2D
 
 const bullet : PackedScene = preload("res://scenes/components/Bullet.tscn")
-const death_screen : PackedScene = preload("res://scenes/screens/DeathScreen.tscn")
 
 @onready var UI : CanvasLayer = $UI
+@onready var pause_screen : Control = $UI/PauseScreen
+@onready var death_screen : Control = $UI/DeathScreen
 @onready var enemies_left_label : Label = $UI/LevelStats/EnemiesLeft/Label
 @onready var animator : AnimationPlayer = $UI/LevelStats/AnimationPlayer
 @export var spawnrate : float = 1
@@ -18,6 +19,7 @@ func _ready():
 	GameManager.shot_fired.connect(spawn_bullet)
 	GameManager.player_is_dead.connect(display_death_screen)
 	GameManager.enemy_killed.connect(update_enemies_killed)
+	GameManager.pause_toggled.connect(toggle_pause)
 	enemies_left = total_enemies
 	update_enemies_left_label()
 	spawn_points = $EnemySpawnPoints.get_children()
@@ -30,7 +32,6 @@ func _physics_process(delta):
 	if (cooldown >= spawnrate and enemies_spawned < total_enemies):
 		spawn_enemy(spawn_points.pick_random())
 		cooldown = 0
-	
 
 # spawns a bullet with given position and rotation 
 func spawn_bullet(spawn_position, spawn_rotation, bullet_damage):
@@ -54,8 +55,7 @@ func spawn_enemy(spawn_point: Node2D):
 # displays the death screen
 func display_death_screen():
 	set_physics_process(false)
-	var death_screen_instance = death_screen.instantiate()
-	UI.add_child(death_screen_instance)
+	death_screen.visible = true
 
 # "pauses" the level while a little animation (displaying the level name) is played
 func level_intro_card():
@@ -72,5 +72,14 @@ func update_enemies_killed():
 	if (enemies_left == 0):
 		GameManager.change_scene("Level 1")
 
+# updates the number in the enemies left label
 func update_enemies_left_label():
 	enemies_left_label.set_text("%d" % [enemies_left])
+
+# toggles pause the level
+func toggle_pause():
+	# if physics_processing is false, then either the death screen or the level intro are on
+	if is_physics_processing():
+		pause_screen.visible = not pause_screen.visible
+		get_tree().paused = not get_tree().paused
+	

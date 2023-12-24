@@ -32,7 +32,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [-25.0]
+"values": [-15.0]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -116,7 +116,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [-25.0, -80.0]
+"values": [-15.0, -80.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_v65nh"]
@@ -130,9 +130,11 @@ _data = {
 [sub_resource type="Theme" id="Theme_68s4g"]
 
 [node name="MainScreen" type="CanvasLayer"]
+process_mode = 3
 script = ExtResource("1_g575d")
 
 [node name="MenuAnimator" type="AnimationPlayer" parent="."]
+process_mode = 3
 deterministic = true
 root_node = NodePath("../MainMenu/MenuOptions")
 libraries = {
@@ -161,11 +163,7 @@ texture = ExtResource("3_bhvwj")
 
 [node name="MainMenu" type="Control" parent="."]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = 0
 
 [node name="MenuOptions" type="TextureRect" parent="MainMenu"]
 z_as_relative = false
@@ -174,7 +172,8 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = -640.0
-offset_bottom = -640.0
+offset_right = 1152.0
+offset_bottom = 8.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("4_8odao")
@@ -319,7 +318,7 @@ text = "start"
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_1ppum")
-volume_db = -25.0
+volume_db = -15.0
 autoplay = true
 
 [connection signal="pressed" from="MainMenu/MenuOptions/Play" to="." method="_on_play_pressed"]

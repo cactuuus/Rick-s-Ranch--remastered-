@@ -24,6 +24,8 @@ func update_input_key(action: String, play_animation: bool = true):
 	keys[action]["current_key"] = key.as_text_keycode() if key.keycode else "" 
 	if play_animation:
 		animation_tree.set("parameters/{0}/request".format([action]), 1)
+		if not keys[action]["current_key"]:
+			keys[action]["label"].get_parent().self_modulate = Color.DARK_RED
 	else:
 		update_label_text(action)
 
