@@ -70,7 +70,7 @@ func update_enemies_killed():
 	update_enemies_left_label()
 	animator.play("font_pulse")
 	if (enemies_left == 0):
-		GameManager.change_scene("Level 1")
+		GameManager.next_level()
 
 # updates the number in the enemies left label
 func update_enemies_left_label():

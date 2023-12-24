@@ -73,13 +73,13 @@ _data = {
 
 [node name="Snake" type="CharacterBody2D"]
 collision_layer = 2
-collision_mask = 39
+collision_mask = 35
 motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_34lyq")
 max_health = 30
 attack = 5
-speed = 25.0
+speed = 40.0
 
 [node name="EnemySprite" type="AnimatedSprite2D" parent="."]
 texture_filter = 1

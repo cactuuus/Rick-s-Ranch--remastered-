@@ -37,7 +37,7 @@ tracks/0/path = NodePath("TextureRect:texture:gradient:offsets")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
+"times": PackedFloat32Array(0, 0.9),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [PackedFloat32Array(0, 1), PackedFloat32Array(0, 0)]
@@ -53,6 +53,7 @@ _data = {
 process_mode = 3
 
 [node name="TextureRect" type="TextureRect" parent="."]
+texture_filter = 2
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

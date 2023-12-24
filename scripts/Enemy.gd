@@ -15,14 +15,14 @@ func _ready():
 	add_to_group("enemies")
 	cry_timer.set_wait_time(randf_range(0.5, 3))
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	var target = player.global_position
 	var direction = global_position.direction_to(target).normalized()
-	velocity = direction * speed * delta
+	velocity = direction * speed
 	update_sprite_direction(direction)
-	var collision = move_and_collide(velocity)
-	if collision:
-		handle_collision(collision)
+	var collided = move_and_slide()
+	if collided:
+		handle_collision(get_last_slide_collision())
 
 func update_sprite_direction(direction):
 	sprite.scale.x = 1 if direction.x < 0 else -1

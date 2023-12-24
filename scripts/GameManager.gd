@@ -12,9 +12,11 @@ signal pause_toggled()
 @onready var scene_transition = preload("res://scenes/screens/SceneTransition.tscn")
 @onready var death_screen = preload("res://scenes/screens/DeathScreen.tscn")
 var level_music_instance
+var current_level
 const SCENES : Dictionary = {
 	"Main Menu" : "res://scenes/screens/MainMenu.tscn",
-	"Level 1" : "res://scenes/levels/TestScene.tscn",
+	"Level 1" : "res://scenes/levels/Level1.tscn",
+	"Level 2" : "res://scenes/levels/Level2.tscn",
 }
 
 func _ready():
@@ -46,10 +48,16 @@ func return_to_main_menu():
 # load the first level and starts the in-level music (if not already playing)
 func start_the_game():
 	reset_input_keys.emit()
+	current_level = 1
 	await change_scene("Level 1")
 	if not level_music_instance:
 		level_music_instance = level_music.instantiate()
 		get_tree().root.add_child(level_music_instance)
+
+func next_level():
+	current_level += 1
+	await change_scene("Level %d" % current_level)
+	
 
 # quits the game
 func quit_game():

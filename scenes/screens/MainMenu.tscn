@@ -229,7 +229,6 @@ stream = ExtResource("6_2jt8r")
 volume_db = -8.0
 
 [node name="HowToPlayScreen" type="Control" parent="."]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -281,9 +280,9 @@ grow_vertical = 2
 theme_override_font_sizes/font_size = 26
 text = "Rick likes to drink, and he is slowly forgetting how to move!
 
-As you fight endless hoardes of enemies, keep an eye out for your directional controls: your directional keys will consume over time and re-bind to new, random ones.
+Point and shoot at the enemies, but keep an eye out for your controls: over time, your directional keys will re-bind to new, random ones, and you might eventually run out of keys!
 
-How long will you be able to defend his ranch?"
+how long will you be able to defend your ranch?"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
