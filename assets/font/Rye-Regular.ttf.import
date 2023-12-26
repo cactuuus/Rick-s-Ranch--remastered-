@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://bel0b8towaosx"
-path="res://.godot/imported/RyeRegular-MVZKe.ttf-7a5eee407a6ac7abc848d9ce24c983e2.fontdata"
+uid="uid://dil1fvrsm60wn"
+path="res://.godot/imported/Rye-Regular.ttf-6396d38124d33b5f48df5ba7bc238fb0.fontdata"
 
 [deps]
 
-source_file="res://assets/font/RyeRegular-MVZKe.ttf"
-dest_files=["res://.godot/imported/RyeRegular-MVZKe.ttf-7a5eee407a6ac7abc848d9ce24c983e2.fontdata"]
+source_file="res://assets/font/Rye-Regular.ttf"
+dest_files=["res://.godot/imported/Rye-Regular.ttf-6396d38124d33b5f48df5ba7bc238fb0.fontdata"]
 
 [params]
 
@@ -27,13 +27,7 @@ Fallbacks=null
 fallbacks=[]
 Compress=null
 compress=true
-preload=[{
-"chars": [],
-"glyphs": [],
-"name": "New Configuration",
-"size": Vector2i(16, 0),
-"variation_embolden": 0.0
-}]
+preload=[]
 language_support={}
 script_support={}
 opentype_features={}

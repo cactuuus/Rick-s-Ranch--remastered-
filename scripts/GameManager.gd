@@ -11,8 +11,8 @@ signal pause_toggled()
 @onready var level_music = preload("res://scenes/levels/LevelMusic.tscn")
 @onready var scene_transition = preload("res://scenes/screens/SceneTransition.tscn")
 @onready var death_screen = preload("res://scenes/screens/DeathScreen.tscn")
-var level_music_instance
-var current_level
+var level_music_instance : AudioStreamPlayer
+var current_level : int
 const SCENES : Dictionary = {
 	"Main Menu" : "res://scenes/screens/MainMenu.tscn",
 	"Level 1" : "res://scenes/levels/Level1.tscn",
@@ -63,3 +63,5 @@ func next_level():
 func quit_game():
 	get_tree().quit()
 
+func set_sound(state: bool):
+	AudioServer.set_bus_mute(0, state)

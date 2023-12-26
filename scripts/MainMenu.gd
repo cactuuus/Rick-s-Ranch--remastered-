@@ -4,9 +4,14 @@ extends CanvasLayer
 @onready var parallax_bg : ParallaxBackground = $ParallaxBackground
 @onready var how_to_play_screen : Control = $HowToPlayScreen
 @onready var music : AudioStreamPlayer = $Music
+@onready var sound_btn : = $MainMenu/MenuOptions/Sound
+@onready var sound_striketrough : = $MainMenu/MenuOptions/Sound/Striketrough
 
 func _ready():
 	how_to_play_screen.visible = false
+	var muted = AudioServer.is_bus_mute(0)
+	sound_btn.set_pressed_no_signal(muted)
+	sound_striketrough.visible = muted
 
 func _physics_process(delta):
 	parallax_bg.scroll_offset.x += 10 * delta
@@ -16,11 +21,6 @@ func _physics_process(delta):
 func _on_play_pressed():
 	await wait_for_animation("fade_out")
 	how_to_play_screen.visible = true
-
-# opens the settings sub-menu
-func _on_settings_pressed():
-	#await wait_for_animation("fade_out")
-	print("Sound Menu")
 
 # quits the game
 func _on_quit_pressed():
@@ -42,3 +42,8 @@ func _on_back_pressed():
 func _on_start_pressed():
 	menu_animator.play("music_fade_out")
 	GameManager.start_the_game()
+
+func _on_sound_toggled(toggled_on):
+	print("sound: ", toggled_on)
+	GameManager.set_sound(toggled_on)
+	sound_striketrough.visible = not sound_striketrough.visible
