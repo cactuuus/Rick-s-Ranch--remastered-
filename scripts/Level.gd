@@ -5,15 +5,12 @@ const bullet : PackedScene = preload("res://scenes/components/Bullet.tscn")
 @onready var UI : CanvasLayer = $UI
 @onready var pause_screen : Control = $UI/PauseScreen
 @onready var death_screen : Control = $UI/DeathScreen
-@onready var enemies_left_label : Label = $UI/LevelStats/EnemiesLeft/Label
-@onready var animator : AnimationPlayer = $UI/LevelStats/AnimationPlayer
-@export var spawnrate : float = 1
+@onready var level_stats : Control = $UI/LevelStats
 @export var enemies : Array[PackedScene]
 @export var total_enemies : int
 var enemies_spawned : int = 0
 var enemies_left : int
 var spawn_points : Array[Node]
-var cooldown : float = 0
 
 func _ready():
 	GameManager.shot_fired.connect(spawn_bullet)
@@ -21,17 +18,11 @@ func _ready():
 	GameManager.enemy_killed.connect(update_enemies_killed)
 	GameManager.pause_toggled.connect(toggle_pause)
 	enemies_left = total_enemies
-	update_enemies_left_label()
+	level_stats.update_enemies_left_label(enemies_left, false)
 	spawn_points = $EnemySpawnPoints.get_children()
-	await level_intro_card()
-	for point in spawn_points:
-		spawn_enemy(point)
-
-func _physics_process(delta):
-	cooldown += delta
-	if (cooldown >= spawnrate and enemies_spawned < total_enemies):
-		spawn_enemy(spawn_points.pick_random())
-		cooldown = 0
+	await play_level_intro()
+	for spawn_point in spawn_points:
+		spawn_enemy(spawn_point)
 
 # spawns a bullet with given position and rotation 
 func spawn_bullet(spawn_position, spawn_rotation, bullet_damage):
@@ -58,7 +49,7 @@ func display_death_screen():
 	death_screen.visible = true
 
 # "pauses" the level while a little animation (displaying the level name) is played
-func level_intro_card():
+func play_level_intro():
 	set_physics_process(false)
 	await $UI/LevelIntro/AnimationPlayer.animation_finished
 	$UI/LevelIntro.queue_free()
@@ -67,14 +58,9 @@ func level_intro_card():
 # increment the enemies killed count by one
 func update_enemies_killed():
 	enemies_left -= 1
-	update_enemies_left_label()
-	animator.play("font_pulse")
+	level_stats.update_enemies_left_label(enemies_left)
 	if (enemies_left == 0):
 		GameManager.next_level()
-
-# updates the number in the enemies left label
-func update_enemies_left_label():
-	enemies_left_label.set_text("%d" % [enemies_left])
 
 # toggles pause the level
 func toggle_pause():
@@ -83,3 +69,7 @@ func toggle_pause():
 		pause_screen.visible = not pause_screen.visible
 		get_tree().paused = not get_tree().paused
 	
+# on timeout spawns an enemy
+func _on_spawnrate_timeout():
+	if enemies_spawned < total_enemies:
+		spawn_enemy(spawn_points.pick_random())

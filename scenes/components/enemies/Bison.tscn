@@ -92,8 +92,8 @@ motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_axavk")
 max_health = 60
-attack = 15
-speed = 25.0
+attack = 12
+speed = 30.0
 
 [node name="EnemySprite" type="AnimatedSprite2D" parent="."]
 texture_filter = 1

@@ -1,5 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://c8t62crjmgfjf"]
+[gd_scene load_steps=10 format=3 uid="uid://c8t62crjmgfjf"]
 
+[ext_resource type="Script" path="res://scripts/LevelStats.gd" id="1_883s2"]
 [ext_resource type="Texture2D" uid="uid://cdd6krlf5x6yh" path="res://assets/UI/menu/ropes-short.png" id="1_jjor3"]
 [ext_resource type="Texture2D" uid="uid://ff4xgcd6coug" path="res://assets/enemies/volture.png" id="2_kguik"]
 [ext_resource type="Texture2D" uid="uid://be33of1dnnjr6" path="res://assets/enemies/bison.png" id="3_y0smw"]
@@ -22,7 +23,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("EnemiesLeft/Label:theme_override_font_sizes/font_size")
+tracks/1/path = NodePath("Sign/EnemiesLeft:theme_override_font_sizes/font_size")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -53,7 +54,7 @@ resource_name = "font_pulse"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("EnemiesLeft/Label:theme_override_font_sizes/font_size")
+tracks/0/path = NodePath("Sign/EnemiesLeft:theme_override_font_sizes/font_size")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -76,6 +77,7 @@ anchors_preset = 0
 offset_top = -213.0
 offset_right = 1152.0
 offset_bottom = 1.0
+script = ExtResource("1_883s2")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -83,7 +85,7 @@ libraries = {
 }
 autoplay = "drop_in"
 
-[node name="EnemiesLeft" type="TextureRect" parent="."]
+[node name="Sign" type="TextureRect" parent="."]
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 1
@@ -97,7 +99,7 @@ grow_horizontal = 0
 texture = ExtResource("1_jjor3")
 flip_h = true
 
-[node name="Label" type="Label" parent="EnemiesLeft"]
+[node name="EnemiesLeft" type="Label" parent="Sign"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -115,23 +117,28 @@ horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
 
-[node name="Sprite2D3" type="Sprite2D" parent="EnemiesLeft"]
-visible = false
-position = Vector2(152, 104)
-scale = Vector2(3, 3)
+[node name="Enemies" type="Control" parent="Sign"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Vulture" type="Sprite2D" parent="Sign/Enemies"]
+position = Vector2(180, 89)
+scale = Vector2(2.2, 2.2)
+texture = ExtResource("2_kguik")
+hframes = 3
+
+[node name="Bison" type="Sprite2D" parent="Sign/Enemies"]
+position = Vector2(241, 106)
+scale = Vector2(2.2, 2.2)
 texture = ExtResource("3_y0smw")
 hframes = 4
 
-[node name="Sprite2D" type="Sprite2D" parent="EnemiesLeft"]
-position = Vector2(198, 91)
-scale = Vector2(4, 4)
+[node name="Snake" type="Sprite2D" parent="Sign/Enemies"]
+position = Vector2(160, 107)
+scale = Vector2(2.5, 2.5)
 texture = ExtResource("4_ncvgd")
 hframes = 2
-
-[node name="Sprite2D2" type="Sprite2D" parent="EnemiesLeft"]
-visible = false
-position = Vector2(88, 96)
-scale = Vector2(3, 3)
-texture = ExtResource("2_kguik")
-flip_h = true
-hframes = 3

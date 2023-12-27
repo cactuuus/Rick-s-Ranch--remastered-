@@ -285,7 +285,6 @@ stream = ExtResource("6_2jt8r")
 volume_db = -8.0
 
 [node name="HowToPlayScreen" type="Control" parent="."]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -320,6 +319,7 @@ grow_horizontal = 2
 theme_override_font_sizes/font_size = 46
 text = "how to play"
 horizontal_alignment = 1
+vertical_alignment = 1
 uppercase = true
 
 [node name="Explanation" type="Label" parent="HowToPlayScreen/Instructions"]

@@ -79,6 +79,7 @@ libraries = {
 "": SubResource("AnimationLibrary_xj3qe")
 }
 autoplay = "fade"
+movie_quit_on_finish = true
 
 [node name="Background" type="ColorRect" parent="."]
 self_modulate = Color(0.152941, 0.152941, 0.152941, 0.545098)

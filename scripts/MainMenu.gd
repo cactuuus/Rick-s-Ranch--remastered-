@@ -24,7 +24,6 @@ func _on_play_pressed():
 
 # quits the game
 func _on_quit_pressed():
-	await wait_for_animation("fade_out")
 	GameManager.quit_game()
 	
 # starts an animation and waits until it is over
@@ -44,6 +43,5 @@ func _on_start_pressed():
 	GameManager.start_the_game()
 
 func _on_sound_toggled(toggled_on):
-	print("sound: ", toggled_on)
 	GameManager.set_sound(toggled_on)
 	sound_striketrough.visible = not sound_striketrough.visible
